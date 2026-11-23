@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Portofolio Faisal Ahmad Khoir</title>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;900&family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<style>
+:root{--bg:#04130b;--p1:#0e5d31;--p2:#0a4a27;--pn:#0b2518;--tx:#eaf8ee;--mu:#9fc4ad;--ac:#c6ff3d;--lime:#c6ff3d;--or:#ff7a1a;--nav:#03100a;--hd:'Big Shoulders Display',Impact,sans-serif;color-scheme:dark}
+:root[data-theme=light]{--bg:#e6f5e9;--p1:#86d696;--p2:#72c986;--pn:#fff;--tx:#10301e;--mu:#3f6350;--ac:#0c7a38;color-scheme:light}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-padding-top:90px}
+body{font-family:'Manrope',system-ui,sans-serif;color:var(--tx);line-height:1.6;overflow-x:hidden;background:radial-gradient(60vmax 60vmax at 0 -10%,rgba(198,255,61,.16),transparent 60%),radial-gradient(60vmax 60vmax at 100% -10%,rgba(255,122,26,.13),transparent 60%),var(--bg) fixed;padding-bottom:env(safe-area-inset-bottom,0px)}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:3px solid var(--lime);outline-offset:3px}
+h1,h2,h3{font-family:var(--hd);font-weight:900;text-transform:uppercase;letter-spacing:.02em;line-height:.95}
+.floor{position:fixed;left:-60%;right:-60%;bottom:-8vh;height:62vh;z-index:0;pointer-events:none;transform:perspective(520px) rotateX(64deg);transform-origin:50% 100%;background:repeating-linear-gradient(90deg,var(--p1) 0 7vw,var(--p2) 7vw 14vw);-webkit-mask:linear-gradient(transparent,#000 65%);mask:linear-gradient(transparent,#000 65%)}
+.floor::after{content:"";position:absolute;left:50%;top:14%;width:30vw;aspect-ratio:1;border:4px solid rgba(255,255,255,.5);border-radius:50%;transform:translateX(-50%)}
+/* loading */
+#loading{--tx:#eaf8ee;--ac:#c6ff3d;--p1:#0e5d31;--p2:#0a4a27;position:fixed;inset:0;z-index:100;background:#04130b;color:#eaf8ee;overflow:hidden;transition:opacity .8s,visibility .8s}
+#loading .floor{z-index:0}
+.hide{opacity:0;visibility:hidden}
+#ltitle{position:absolute;left:0;right:0;top:calc(11% + env(safe-area-inset-top,0px));text-align:center;font:900 clamp(3rem,11vw,6.5rem)/1 var(--hd);color:var(--lime);text-shadow:0 6px 0 #0a4a27,0 0 30px rgba(198,255,61,.5)}
+#ltitle span{display:inline-block;animation:wob .45s ease-in-out infinite alternate;animation-delay:calc(var(--i)*70ms)}
+#goal{position:absolute;right:7%;top:44%;width:min(26vw,230px);aspect-ratio:1.5;border:6px solid #fff;border-bottom:0;background:repeating-linear-gradient(45deg,rgba(255,255,255,.3) 0 2px,transparent 2px 12px),repeating-linear-gradient(-45deg,rgba(255,255,255,.3) 0 2px,transparent 2px 12px);transform-origin:50% 100%}
+#goal.hn{animation:net .6s}
+.boot{position:absolute;width:34px;height:140px;transform-origin:17px 0;z-index:121;pointer-events:none}
+.boot::before{content:"";position:absolute;left:0;top:0;width:34px;height:118px;border-radius:17px 17px 6px 6px;background:linear-gradient(90deg,#0a8a3c,#2ee673,#0a8a3c)}
+.boot::after{content:"";position:absolute;left:0;bottom:0;width:84px;height:30px;border-radius:6px 28px 6px 6px;background:#fff;border-bottom:9px solid var(--or)}
+.lui{position:absolute;left:0;right:0;bottom:calc(7% + env(safe-area-inset-bottom,0px));display:grid;justify-items:center;gap:8px;z-index:2}
+#ltip{font-weight:800;color:var(--lime)}
+.lbar{width:min(380px,80vw);height:16px;border:2px solid var(--lime);border-radius:999px;padding:2px;background:#04130b99}
+.lbar b{display:block;height:100%;width:0;border-radius:999px;background:repeating-linear-gradient(90deg,var(--lime) 0 12px,#2ee673 12px 24px)}
+#lpct{font:900 2.4rem/1 var(--hd);color:#eaff9a}
+#boom{position:absolute;inset:0;background:#f4ffd0;opacity:0;pointer-events:none;z-index:5}#boom.f{animation:flash .9s}
+#cv{position:fixed;inset:0;width:100%;height:100%;z-index:120;pointer-events:none}
+.shk{animation:shk .45s}.shk2{animation:shk .5s 2}
+/* nav */
+nav{position:fixed;top:0;left:0;right:0;z-index:60;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:calc(10px + env(safe-area-inset-top,0px)) 4% 10px;background:linear-gradient(var(--nav),transparent)}
+.brand{font:900 1.7rem/1 var(--hd);color:var(--lime);letter-spacing:.06em;cursor:pointer;display:flex;gap:8px;align-items:center}
+.brand b{background:var(--lime);color:#06200f;padding:2px 7px;border-radius:6px;transform:skewX(-8deg)}
+.nr{display:flex;align-items:center;gap:8px}
+.links{list-style:none;position:relative;display:flex;padding:4px;border:1px solid rgba(198,255,61,.4);border-radius:999px;background:rgba(3,16,10,.78);backdrop-filter:blur(10px)}
+.links a{position:relative;z-index:1;display:block;overflow:hidden;padding:9px 14px;border-radius:999px;font-weight:800;font-size:.85rem;color:#eaf8ee;transition:color .3s,transform .15s}
+.links a:active{transform:scale(.88)}.links a.active{color:#06200f}
+#pill{position:absolute;top:4px;bottom:4px;left:0;width:0;border-radius:999px;background:var(--lime);box-shadow:0 0 18px rgba(198,255,61,.6);transition:left .5s cubic-bezier(.3,1.6,.5,1),width .5s cubic-bezier(.3,1.6,.5,1)}
+.rip{position:absolute;border-radius:50%;background:rgba(255,255,255,.7);transform:scale(0);animation:rp .6s ease-out forwards;pointer-events:none}
+#theme,#burger{width:40px;height:40px;border-radius:50%;border:2px solid var(--lime);background:rgba(3,16,10,.78);color:var(--lime);font-size:1rem;cursor:pointer}#burger{display:none}
+/* page wipe */
+.wipe{position:fixed;inset:0;z-index:150;display:flex;pointer-events:none;visibility:hidden}.wipe.in,.wipe.out{visibility:visible;pointer-events:auto}
+.st{flex:1;transform:scaleY(0);transform-origin:top;transition:transform .45s cubic-bezier(.7,0,.2,1);transition-delay:calc(var(--i)*60ms)}
+.st:nth-child(odd){background:#0e5d31}.st:nth-child(even){background:#0a4a27}
+.wipe.in .st{transform:scaleY(1)}.wipe.out .st{transform-origin:bottom}
+.wl{position:absolute;inset:0;display:grid;place-items:center;font:900 clamp(3rem,14vw,9.5rem)/1 var(--hd);text-transform:uppercase;color:#c6ff3d;opacity:0;transform:scale(.6) skewX(-10deg);transition:.35s .35s}
+.wipe.in .wl{opacity:1;transform:none}.wipe.out .wl{transition-delay:0s}
+.wb{position:absolute;left:0;top:64%;font-size:84px;transform:translateX(-30vw)}.wipe.in .wb{animation:roll .95s ease-in-out}
+/* views */
+.view{display:none;position:relative;z-index:2;max-width:1100px;margin:auto;padding:110px 5% 60px;min-height:100vh}.view.on{display:block}
+.view.on .rv{animation:pop .75s cubic-bezier(.2,.9,.3,1.15) backwards;animation-delay:calc(var(--i,0)*70ms)}
+h2{font-size:clamp(2.8rem,8vw,5rem)}.sub{color:var(--mu);margin:8px 0 30px}
+.pc{background:var(--pn);color:var(--tx);border-left:5px solid var(--lime);padding:22px 24px;clip-path:polygon(0 0,calc(100% - 22px) 0,100% 22px,100% 100%,22px 100%,0 calc(100% - 22px));transition:transform .15s}
+:root[data-theme=light] .pc{box-shadow:inset 0 0 0 1px #cfe3d2}
+.pc h3{font-size:1.9rem;color:var(--ac)}.pc p{color:var(--mu)}
+.btn{display:inline-flex;gap:8px;align-items:center;cursor:pointer;font:800 .95rem 'Manrope',sans-serif;padding:13px 26px;background:var(--lime);color:#06200f;border:0;border-radius:999px;box-shadow:0 5px 0 #4f8a12,0 0 24px rgba(198,255,61,.4);transition:.15s;margin:4px 8px 8px 0}
+.btn:hover{transform:translateY(3px);box-shadow:0 2px 0 #4f8a12}.btn.alt{background:#f4fff0;box-shadow:0 5px 0 #9dbfa6}
+/* home */
+#home.on{display:grid;grid-template-columns:1.05fr 1fr;gap:10px;align-items:center}
+.hi{color:var(--or);font-weight:800}
+#home h1{font-size:clamp(4rem,11.5vw,8.6rem);line-height:.84;margin:10px 0 16px}
+#home h1 .o{color:transparent;-webkit-text-stroke:2px var(--ac)}
+.typ{font:900 1.9rem/1.2 var(--hd);color:var(--or);min-height:2.4rem;letter-spacing:.04em}
+.tags span{display:inline-block;margin:0 6px 6px 0;padding:4px 14px;border:1px solid var(--ac);border-radius:999px;font-weight:800;font-size:.8rem;color:var(--ac)}
+.lead{color:var(--mu);max-width:470px;margin:8px 0 16px}
+#anchor{position:relative;height:min(72vh,600px);cursor:pointer;-webkit-tap-highlight-color:transparent}
+.nine{position:absolute;inset:0;display:grid;place-items:center;font:900 clamp(16rem,36vw,32rem)/1 var(--hd);color:transparent;-webkit-text-stroke:2px color-mix(in srgb,var(--ac) 38%,transparent);user-select:none}
+#shd{position:absolute;left:50%;bottom:7%;width:46%;height:26px;margin-left:-23%;border-radius:50%;background:radial-gradient(#000a,transparent 70%)}
+.hint{position:absolute;left:0;right:0;bottom:-6px;text-align:center;color:var(--mu);font-weight:600;font-size:.85rem}
+.fbk{position:absolute;inset:0;display:grid;place-items:center;font-size:12rem}
+/* content */
+.about{display:grid;grid-template-columns:.8fr 1.4fr;gap:20px}.col{display:grid;gap:20px}.id{text-align:center}
+.av{width:150px;height:150px;margin:0 auto 12px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,#7ae8a0 60%,#0a8a3c);display:grid;place-items:center;font:900 5.5rem/1 var(--hd);color:#06200f;box-shadow:0 0 30px rgba(198,255,61,.5),inset -10px -14px 24px #0004}
+.xp,.bar{height:12px;background:#ffffff22;border-radius:9px;overflow:hidden;margin:10px 0 4px}
+.xp b,.bar b{display:block;height:100%;width:0;background:linear-gradient(90deg,#0a8a3c,var(--lime),var(--or));transition:width 1.6s}
+dl{display:grid;grid-template-columns:100px 1fr;gap:6px 10px}dt{font-weight:800;color:var(--ac)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:18px;margin-top:30px;text-align:center}
+.chip{width:104px;height:104px;margin:0 auto 6px;border-radius:50%;display:grid;place-items:center;background:repeating-conic-gradient(#fff 0 14deg,var(--c) 14deg 45deg);box-shadow:0 0 24px rgba(198,255,61,.4),inset 0 0 0 12px var(--c)}
+.chip b{font:900 2.2rem/1 var(--hd);color:#fff;text-shadow:0 2px 6px #000}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:22px}
+.flip{perspective:900px;height:230px;cursor:pointer}.flip .in{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .7s}
+.flip:hover .in,.flip:focus .in,.flip.on .in{transform:rotateY(180deg)}
+.flip .fr,.flip .bk{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:4px}
+.flip .bk{transform:rotateY(180deg);background:linear-gradient(160deg,#0a8a3c,#06502a);color:#fff;padding:20px;font-weight:700;clip-path:polygon(0 0,calc(100% - 22px) 0,100% 22px,100% 100%,22px 100%,0 calc(100% - 22px))}
+.ico{font-size:3.2rem;line-height:1.1}
+.skill{margin:14px 0}.skill>div:first-child{display:flex;justify-content:space-between;font-weight:800}
+.gal{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:18px;perspective:1000px}
+.gi{aspect-ratio:1;border-radius:18px;display:grid;place-items:center;font-size:5rem;cursor:pointer;position:relative;overflow:hidden;border:2px solid var(--lime);transition:transform .25s}
+.gi:hover{transform:rotateY(-12deg) rotateX(6deg) scale(1.05)}.gi span{position:absolute;bottom:0;left:0;right:0;background:#000b;color:#fff;font:800 .85rem 'Manrope';padding:8px;text-align:center}
+#lb{position:fixed;inset:0;z-index:95;background:#000d;display:none;place-items:center;padding:20px}#lb.on{display:grid}
+#lb .box{width:min(92vw,460px);text-align:center;color:#fff}#lb .big{aspect-ratio:1;border-radius:22px;display:grid;place-items:center;font-size:9rem;border:3px solid var(--lime)}
+#lb p{margin:12px 0}#lb button{background:var(--lime);color:#06200f;border:0;border-radius:50%;width:44px;height:44px;font-size:1.2rem;cursor:pointer;margin:0 8px}
+.achs{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
+.ach{display:flex;gap:14px;align-items:center}.ach small{font-weight:800;color:var(--or)}.ach.lock{filter:grayscale(1) opacity(.65)}
+.goalwrap{display:grid;grid-template-columns:1.3fr 1fr;gap:24px;align-items:start}.goals{display:grid;gap:16px}.goal{display:flex;gap:14px;align-items:center}
+.draw{text-align:center}.draw .av{cursor:pointer;font-size:4.5rem;transition:transform .8s}#fq{margin:10px 0;min-height:3.2em;font-weight:800;color:var(--ac)}
+.card{text-align:center;display:block}.card b{color:var(--ac)}
+footer{position:relative;z-index:2;text-align:center;padding:30px 5%;color:var(--mu)}
+.conf{position:fixed;z-index:130;pointer-events:none;font-size:28px;margin:-14px 0 0 -14px}
+@keyframes pop{from{opacity:0;transform:perspective(900px) translateY(50px) rotateX(-40deg) scale(.92)}}
+@keyframes roll{to{transform:translateX(125vw) rotate(900deg)}}
+@keyframes wob{from{transform:rotate(-5deg) translateY(0)}to{transform:rotate(5deg) translateY(-9px)}}
+@keyframes shk{10%{transform:translate(-10px,6px) rotate(-.7deg) scale(1.03)}30%{transform:translate(9px,-7px) rotate(.6deg) scale(1.03)}50%{transform:translate(-7px,-4px) scale(1.03)}70%{transform:translate(5px,6px) scale(1.03)}100%{transform:none}}
+@keyframes net{30%{transform:scale(1.08,.92) skewX(-5deg)}60%{transform:scale(.97,1.04) skewX(3deg)}}
+@keyframes flash{0%{opacity:0}30%{opacity:1}100%{opacity:0}}
+@keyframes rp{to{transform:scale(1);opacity:0}}
+@media(max-width:820px){#home.on,.about,.goalwrap{grid-template-columns:1fr}#home{text-align:center}.lead{margin-inline:auto}#anchor{height:340px}#burger{display:block}.links{display:none;position:absolute;top:100%;right:4%;left:4%;flex-direction:column;border-radius:22px}.links.open{display:flex}#pill{display:none}.links a.active{background:var(--lime)}}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+</style>
+</head>
+<body data-v="home">
+<div id="loading"><div class="floor"></div><div id="ltitle" aria-label="Futsal Arena"></div><div id="goal"></div><div class="boot" id="boot"></div>
+<div class="lui"><p id="ltip">Pemanasan…</p><div class="lbar"><b id="lfill"></b></div><div id="lpct">0%</div></div><div id="boom"></div></div>
+<canvas id="cv"></canvas>
+<div class="floor"></div>
+<div class="wipe" id="wipe"><div class="st" style="--i:0"></div><div class="st" style="--i:1"></div><div class="st" style="--i:2"></div><div class="st" style="--i:3"></div><div class="st" style="--i:4"></div><div class="st" style="--i:5"></div><div class="wl" id="wl"></div><div class="wb">⚽</div></div>
+
+<nav><a class="brand" data-v="home" href="#home" aria-label="Beranda"><b>9</b>FAISAL</a>
+<div class="nr"><ul class="links" id="links"><div id="pill"></div>
+<li><a href="#home" data-v="home">Beranda</a></li><li><a href="#profil" data-v="profil">Profil</a></li><li><a href="#hobi" data-v="hobi">Hobi</a></li><li><a href="#galeri" data-v="galeri">Galeri</a></li><li><a href="#achievement" data-v="achievement">Achievement</a></li><li><a href="#goals" data-v="goals">Cita-cita</a></li><li><a href="#kontak" data-v="kontak">Kontak</a></li></ul>
+<button id="theme" aria-label="Ganti tema terang atau gelap">☀</button><button id="burger" aria-label="Buka menu">☰</button></div></nav>
+
+<main>
+<section class="view" id="home"><div><p class="hi rv">Selamat datang di lapangan Faisal</p><h1 class="rv">Faisal<br><span class="o">Ahmad Khoir</span></h1><div class="typ rv" id="typ"></div>
+<div class="tags rv"><span>Kelas 9</span><span>SMPIT Assyifa Boarding School</span><span>Pemain Futsal</span></div>
+<p class="lead rv">Aku suka futsal, baca buku, work out, dan main HP. Ini portofolio digitalku, tempat semua gol dan momen terbaikku.</p>
+<div class="rv"><a href="#achievement" data-go="achievement" class="btn">🏆 Lihat achievement</a><a href="#kontak" data-go="kontak" class="btn alt">✉ Hubungi aku</a></div></div>
+<div id="anchor" role="button" tabindex="0" aria-label="Tendang bola"><div class="nine">9</div><div id="shd"></div><p class="hint">Ketuk bola untuk menendangnya</p></div></section>
+
+<section class="view" id="profil"><h2 class="rv">Profil pemain</h2><p class="sub rv">Kartu identitas sang striker</p>
+<div class="about"><div class="pc id rv"><div class="av">F</div><h3>Faisal</h3><p style="font-weight:800">Nomor 9 · Striker</p><div class="xp"><b data-w="82"></b></div><small>Stamina menuju level berikutnya</small></div>
+<div class="col"><div class="pc rv"><h3>Data diri</h3><dl><dt>Nama</dt><dd>Faisal Ahmad Khoir</dd><dt>Kelas</dt><dd>9</dd><dt>Sekolah</dt><dd>SMPIT Assyifa Boarding School</dd><dt>Hobi</dt><dd>Futsal, baca buku, work out, tidur, main HP</dd></dl></div>
+<div class="pc rv"><h3>Tentang aku</h3><p>Aku Faisal, siswa boarding yang suka futsal. Di lapangan aku belajar kerja sama tim dan pantang menyerah, sedangkan di luar lapangan aku menambah ilmu lewat buku dan menjaga badan lewat work out.</p></div></div></div>
+<div class="stats rv"><div><div class="chip" style="--c:#0a8a3c"><b data-n="9">0</b></div><span>Kelas</span></div><div><div class="chip" style="--c:#ff7a1a"><b data-n="5">0</b></div><span>Hobi favorit</span></div><div><div class="chip" style="--c:#1d4ed8"><b data-n="100">0</b></div><span>% semangat</span></div><div><div class="chip" style="--c:#22232b"><b data-n="24">0</b></div><span>Jam bola di hati</span></div></div></section>
+
+<section class="view" id="hobi"><h2 class="rv">Hobi</h2><p class="sub rv">Arahkan kursor atau ketuk kartu untuk membaliknya</p><div class="grid" id="hg"></div>
+<h2 class="rv" style="margin-top:70px">Level energi</h2><p class="sub rv">Seberapa besar aku menikmati tiap hobi</p><div class="pc rv" style="max-width:700px" id="skills"></div></section>
+
+<section class="view" id="galeri"><h2 class="rv">Galeri</h2><p class="sub rv">Klik kartu untuk melihat lebih besar</p><div class="gal" id="gal"></div></section>
+<section class="view" id="achievement"><h2 class="rv">Achievement</h2><p class="sub rv">Piala yang sudah terbuka dan yang masih terkunci</p><div class="achs" id="achs"></div></section>
+
+<section class="view" id="goals"><h2 class="rv">Cita-cita</h2><p class="sub rv">Misi menuju juara dalam pertandingan hidup</p>
+<div class="goalwrap"><div class="goals"><div class="pc goal rv"><div class="ico">🎓</div><div><h3>Lulus terbaik</h3><p>Menyelesaikan kelas 9 dengan nilai bagus dan akhlak yang baik.</p></div></div><div class="pc goal rv"><div class="ico">⚽</div><div><h3>Jadi pemain hebat</h3><p>Terus berlatih futsal sampai bisa ikut turnamen besar.</p></div></div><div class="pc goal rv"><div class="ico">🚀</div><div><h3>Masa depan cerah</h3><p>Menjadi orang berilmu yang bermanfaat bagi keluarga dan sesama.</p></div></div></div>
+<div class="draw pc rv"><div class="av" id="dc" role="button" tabindex="0" aria-label="Tendang bola keberuntungan">⚽</div><p id="fq">Tendang bola untuk mendapat kata semangat hari ini!</p><button class="btn" id="dbtn">▶ Tendang!</button></div></div></section>
+
+<section class="view" id="kontak"><h2 class="rv">Kontak</h2><p class="sub rv">Ayo berteman dan main futsal bareng</p><div class="grid">
+<a class="pc card rv" href="https://instagram.com/" target="_blank" rel="noopener"><div class="ico">📸</div><h3>Instagram</h3><b>@faisal.contoh</b></a><a class="pc card rv" href="https://www.tiktok.com/" target="_blank" rel="noopener"><div class="ico">🎵</div><h3>TikTok</h3><b>@faisal_contoh</b></a><a class="pc card rv" href="mailto:faisal@contoh.com"><div class="ico">✉️</div><h3>Email</h3><b>faisal@contoh.com</b></a></div></section>
+<footer>© <span id="yr"></span> Faisal Ahmad Khoir · SMPIT Assyifa Boarding School<br>Dibuat dengan ❤️ dan ⚽</footer>
+</main>
+<div id="lb"><div class="box"><div class="big" id="lbb"></div><p id="lbp"></p><button id="lp" aria-label="Sebelumnya">‹</button><button id="lc" aria-label="Tutup">✕</button><button id="ln" aria-label="Berikutnya">›</button></div></div>
+
+<script>
+var $=function(s){return document.querySelector(s)},$$=function(s){return Array.prototype.slice.call(document.querySelectorAll(s))},root=document.documentElement;
+function setT(t){root.setAttribute('data-theme',t);$('#theme').textContent=t==='dark'?'☀':'🌙';try{localStorage.setItem('fak4',t)}catch(e){}}
+var st=null;try{st=localStorage.getItem('fak4')}catch(e){}setT(st||'dark');
+$('#theme').onclick=function(){setT(root.getAttribute('data-theme')==='dark'?'light':'dark')};
+$('#ltitle').innerHTML='FUTSAL ARENA'.split('').map(function(c,i){return'<span style="--i:'+i+'">'+(c===' '?'&nbsp;':c)+'</span>'}).join('');
+
+/* ===== data ===== */
+var HOB=[['⚽','Futsal','KARTU A','Hobi utamaku! Lari, oper cepat, dan cetak gol bersama tim.',95],['📚','Baca buku','KARTU K','Menambah ilmu dan imajinasi lewat cerita dari berbagai dunia.',85],['🏋️','Work out','KARTU Q','Latihan agar badan kuat, bugar, dan siap bertanding.',88],['😴','Tidur','KARTU J','Recovery terbaik supaya besok kembali bertenaga.',100],['📱','Main HP','KARTU 10','Hiburan di waktu santai bersama teman.',75]];
+$('#hg').innerHTML=HOB.map(function(h){return'<div class="flip rv" tabindex="0"><div class="in"><div class="pc fr"><div class="ico">'+h[0]+'</div><h3>'+h[1]+'</h3><small>'+h[2]+'</small></div><div class="bk"><p>'+h[3]+'</p></div></div></div>'}).join('');
+$('#skills').innerHTML=HOB.map(function(h){return'<div class="skill"><div><span>'+h[0]+' '+h[1]+'</span><span class="pct">0%</span></div><div class="bar"><b data-w="'+h[4]+'"></b></div></div>'}).join('');
+$$('.flip').forEach(function(f){f.onclick=function(){f.classList.toggle('on')}});
+var GAL=[['⚽','Latihan futsal','Keringat hari ini adalah gol esok hari.','linear-gradient(135deg,#0a8a3c,#06b6d4)'],['🏆','Piala kemenangan','Mimpi besar dimulai dari latihan kecil.','linear-gradient(135deg,#ff7a1a,#ffd000)'],['👟','Sepatu andalan','Teman setia di setiap pertandingan.','linear-gradient(135deg,#6d28d9,#ec4899)'],['📚','Waktu membaca','Buku adalah kartu as untuk otak.','linear-gradient(135deg,#2563eb,#38bdf8)'],['🏋️','Work out','Badan kuat, mental lebih kuat.','linear-gradient(135deg,#dc2626,#f97316)'],['🤝','Bersama teman','Tim terbaik dibangun dari kebersamaan.','linear-gradient(135deg,#059669,#a3e635)']],gi=0;
+$('#gal').innerHTML=GAL.map(function(g,i){return'<div class="gi rv" data-i="'+i+'" style="background:'+g[3]+'">'+g[0]+'<span>'+g[1]+'</span></div>'}).join('');
+function showLb(i){gi=(i+GAL.length)%GAL.length;var g=GAL[gi];$('#lbb').style.background=g[3];$('#lbb').textContent=g[0];$('#lbp').textContent=g[1]+' — '+g[2];$('#lb').classList.add('on')}
+$('#gal').onclick=function(e){var g=e.target.closest('.gi');if(g)showLb(+g.dataset.i)};$('#lc').onclick=function(){$('#lb').classList.remove('on')};$('#lp').onclick=function(){showLb(gi-1)};$('#ln').onclick=function(){showLb(gi+1)};
+addEventListener('keydown',function(e){if(e.key==='Escape')$('#lb').classList.remove('on');if($('#lb').classList.contains('on')){if(e.key==='ArrowLeft')showLb(gi-1);if(e.key==='ArrowRight')showLb(gi+1)}});
+var ACH=[['🥇','Pemain Futsal Aktif','Rutin berlatih dan bertanding','TERBUKA',1],['🏅','Siswa Boarding Disiplin','Menjaga jadwal dan kebersihan','TERBUKA',1],['📖','Kutu Buku','Rajin membaca buku','TERBUKA',1],['🏆','Juara Turnamen','Menang turnamen futsal antar sekolah','TERKUNCI',0],['⭐','Top Skor','Pencetak gol terbanyak','TERKUNCI',0],['👑','Kapten Tim','Memimpin tim futsal','TERKUNCI',0]];
+$('#achs').innerHTML=ACH.map(function(a){return'<div class="pc ach rv'+(a[4]?'':' lock')+'"><div class="ico">'+(a[4]?a[0]:'🔒')+'</div><div><h3>'+a[1]+'</h3><p>'+a[2]+'</p><small>'+a[3]+'</small></div></div>'}).join('');
+var Q=['Latihan keras, hasil tuntas! ⚽','Gol terbaik belum kamu cetak. 🔥','Kerja sama tim bikin menang. 🤝','Jangan takut gagal, tendang lagi! 💪','Istirahat cukup, juara menanti. 😴'],qi=0;
+function kickQ(){$('#dc').style.transform='rotateY('+(360*(++qi))+'deg) scale(1.15)';$('#fq').textContent=Q[Math.floor(Math.random()*Q.length)];burst($('#dc'))}
+$('#dbtn').onclick=kickQ;$('#dc').onclick=kickQ;$('#dc').onkeydown=function(e){if(e.key==='Enter'||e.key===' ')kickQ()};
+var Wd=['Pemain Futsal ⚽','Pembaca Buku 📚','Pecinta Work Out 🏋️','Siswa SMPIT 🎓'],wi=0,wj=0,dl2=false;
+(function t(){var s=Wd[wi];$('#typ').textContent=s.slice(0,wj);if(!dl2&&wj++===s.length){dl2=true;return setTimeout(t,1200)}if(dl2&&--wj<0){dl2=false;wj=0;wi=(wi+1)%Wd.length}setTimeout(t,dl2?40:90)})();
+$('#yr').textContent=new Date().getFullYear();
+function burst(el){var r=el.getBoundingClientRect(),x0=r.left+r.width/2,y0=r.top+r.height/2;for(var i=0;i<26;i++){(function(i){var c=document.createElement('span');c.className='conf';c.textContent=['⚽','🏆','⭐','🔥'][i%4];c.style.left=x0+'px';c.style.top=y0+'px';document.body.appendChild(c);var a=Math.random()*6.283,d=120+Math.random()*240;c.animate([{transform:'translate(0,0) scale(.5)',opacity:1},{transform:'translate('+Math.cos(a)*d+'px,'+(Math.sin(a)*d-100)+'px) scale(1.3) rotate(540deg)',opacity:0}],{duration:1300,easing:'ease-out'}).onfinish=function(){c.remove()}})(i)}}
+
+/* ===== halaman & transisi ===== */
+var NAMES={home:'Beranda',profil:'Profil',hobi:'Hobi',galeri:'Galeri',achievement:'Achievement',goals:'Cita-cita',kontak:'Kontak'},cur='',busy=false,start=NAMES[location.hash.slice(1)]?location.hash.slice(1):'home';
+function pill(){var a=$('.links a.active'),p=$('#pill');if(!a){p.style.width='0';return}p.style.left=a.offsetLeft+'px';p.style.width=a.offsetWidth+'px'}
+function cnt(el,n,fn){var c=0,s=setInterval(function(){c+=Math.max(1,n/40);if(c>=n){c=n;clearInterval(s)}fn(el,Math.floor(c))},30)}
+function enter(v){v.querySelectorAll('.rv').forEach(function(e,i){e.style.setProperty('--i',i)});
+ v.querySelectorAll('[data-n]').forEach(function(b){cnt(b,+b.dataset.n,function(e,c){e.textContent=c})});
+ v.querySelectorAll('[data-w]').forEach(function(b){b.style.width='0';setTimeout(function(){b.style.width=b.dataset.w+'%'},350);var sk=b.closest('.skill');if(sk)cnt(sk.querySelector('.pct'),+b.dataset.w,function(e,c){e.textContent=c+'%'})})}
+function show(id){$$('.view').forEach(function(v){v.classList.toggle('on',v.id===id)});cur=id;document.body.dataset.v=id;$$('.links a').forEach(function(a){a.classList.toggle('active',a.dataset.v===id)});pill();enter($('#'+id));scrollTo(0,0);try{history.replaceState(null,'','#'+id)}catch(e){}}
+function go(id){if(busy||id===cur)return;busy=true;var w=$('#wipe');$('#wl').textContent=NAMES[id];w.className='wipe in';setTimeout(function(){show(id)},780);setTimeout(function(){w.className='wipe out'},950);setTimeout(function(){w.className='wipe';busy=false},1750)}
+function ripple(a,e){var r=a.getBoundingClientRect(),s=document.createElement('i'),z=Math.max(r.width,r.height)*2;s.className='rip';s.style.cssText='width:'+z+'px;height:'+z+'px;left:'+(e.clientX-r.left-z/2)+'px;top:'+(e.clientY-r.top-z/2)+'px';a.appendChild(s);setTimeout(function(){s.remove()},600)}
+document.addEventListener('click',function(e){var a=e.target.closest('[data-v],[data-go]');if(!a||!NAMES[a.dataset.v||a.dataset.go])return;e.preventDefault();if(a.closest('.links'))ripple(a,e);go(a.dataset.v||a.dataset.go);$('#links').classList.remove('open')});
+$('#burger').onclick=function(){$('#links').classList.toggle('open')};
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(pill);
+if(matchMedia('(pointer:fine)').matches)$$('.pc').forEach(function(c){c.addEventListener('pointermove',function(e){var r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;c.style.transform='perspective(700px) rotateX('+(-y*9)+'deg) rotateY('+x*11+'deg) translateZ(6px)'});c.addEventListener('pointerleave',function(){c.style.transform=''})});
+
+/* ===== bola 3D ===== */
+var gl=false,R,sc,cam,mesh,pv,dl,W=innerWidth,H=innerHeight,U=1,FOV=35,D=12;
+function mkTex(){var w=1024,h=512,c=document.createElement('canvas');c.width=w;c.height=h;var x=c.getContext('2d'),im=x.createImageData(w,h),d=im.data,f=(1+Math.sqrt(5))/2,V=[],C=[],i,j,k,y,xx,ct=[],sn=[];
+ function nz(a,b,c2){var l=Math.hypot(a,b,c2);return[a/l,b/l,c2/l]}function ds(a,b){return Math.hypot(a[0]-b[0],a[1]-b[1],a[2]-b[2])}
+ [-1,1].forEach(function(s){[-1,1].forEach(function(t){V.push([0,s,t*f],[s,t*f,0],[t*f,0,s])})});
+ V.forEach(function(v){C.push(nz(v[0],v[1],v[2]))});
+ for(i=0;i<12;i++)for(j=i+1;j<12;j++)for(k=j+1;k<12;k++)if(Math.abs(ds(V[i],V[j])-2)<.01&&Math.abs(ds(V[j],V[k])-2)<.01&&Math.abs(ds(V[i],V[k])-2)<.01)C.push(nz(V[i][0]+V[j][0]+V[k][0],V[i][1]+V[j][1]+V[k][1],V[i][2]+V[j][2]+V[k][2]));
+ for(xx=0;xx<w;xx++){ct.push(Math.cos((xx+.5)/w*6.2832));sn.push(Math.sin((xx+.5)/w*6.2832))}
+ for(y=0;y<h;y++){var ph=(y+.5)/h*Math.PI,sy=Math.cos(ph),sr=Math.sin(ph);for(xx=0;xx<w;xx++){var vx=sr*ct[xx],vz=sr*sn[xx],b=-9,s2=-9,bi=0;
+  for(k=0;k<C.length;k++){var q=C[k],t=q[0]*vx+q[1]*sy+q[2]*vz+(k<12?.03:0);if(t>b){s2=b;b=t;bi=k}else if(t>s2)s2=t}
+  var e=Math.min(1,(b-s2)/.035),o=(y*w+xx)*4,m=.16+.84*e;
+  if(bi<12){d[o]=12;d[o+1]=32;d[o+2]=22}else{d[o]=250*m;d[o+1]=252*m;d[o+2]=246*m}d[o+3]=255}}
+ x.putImageData(im,0,0);var tx=new THREE.CanvasTexture(c);tx.encoding=THREE.sRGBEncoding;tx.anisotropy=8;return tx}
+function rs(){W=innerWidth;H=innerHeight;if(!gl)return;R.setSize(W,H,false);cam.aspect=W/H;cam.updateProjectionMatrix();U=2*Math.tan(FOV*Math.PI/360)*D/H;pill()}
+addEventListener('resize',rs);
+function init3d(){try{R=new THREE.WebGLRenderer({canvas:$('#cv'),alpha:true,antialias:true});R.outputEncoding=THREE.sRGBEncoding;R.setPixelRatio(Math.min(devicePixelRatio,2));sc=new THREE.Scene();cam=new THREE.PerspectiveCamera(FOV,1,.1,100);cam.position.z=D;
+ var t=mkTex();mesh=new THREE.Mesh(new THREE.SphereGeometry(1,64,48),new THREE.MeshStandardMaterial({map:t,bumpMap:t,bumpScale:.6,roughness:.38,metalness:.08}));pv=new THREE.Group();pv.add(mesh);sc.add(pv);
+ sc.add(new THREE.AmbientLight(0xffffff,.8));dl=new THREE.DirectionalLight(0xffffff,1.15);dl.position.set(-4,6,8);sc.add(dl);
+ var a=new THREE.PointLight(0xc6ff3d,1.4,40);a.position.set(7,-1,-2);sc.add(a);var b=new THREE.PointLight(0xff7a1a,.8,40);b.position.set(-7,-4,4);sc.add(b);gl=true;rs()}
+ catch(e){gl=false;$('#anchor').insertAdjacentHTML('beforeend','<div class="fbk">⚽</div>')}}
+function put(px,py,r){pv.position.set((px-W/2)*U,-(py-H/2)*U,0);pv.scale.setScalar(Math.max(r,.01)*U)}
+addEventListener('pointermove',function(e){tx=e.clientX/W-.5;ty=e.clientY/H-.5});
+
+/* ===== loop: loading, tendangan, hero ===== */
+var T=0,last=0,mode='load',cx=0,cy=0,cr=0,hh=0,kh=0,kv=0,kicking=false,bs=0,tx=0,ty=0,P=0,cyc=0,ft=0,hit=false,CT=2.3,K=matchMedia('(prefers-reduced-motion:reduce)').matches?4:1,tips=['Pemanasan…','Mengikat tali sepatu…','Dribble bola…','Siap tendangan pertama!'];
+function ease(x){x=x<0?0:x>1?1:x;return x*x*(3-2*x)}
+function imp(big){[$('#loading'),$('#cv')].forEach(function(e){e.classList.remove('shk','shk2');void e.offsetWidth;e.classList.add(big?'shk2':'shk')});
+ if(big){var b=$('#boom');b.classList.remove('f');void b.offsetWidth;b.classList.add('f')}else{var g=$('#goal');g.classList.remove('hn');void g.offsetWidth;g.classList.add('hn')}}
+function ls(dt){var fin=mode==='fin',t=fin?(ft+=dt):(cyc+=dt);if(!fin&&cyc>CT){cyc=t=0;hit=false}
+ var r0=Math.max(30,Math.min(W,H)*.07),sx=Math.max(W*.22,r0+120),sy=H*.64,g=$('#goal').getBoundingClientRect(),gx=g.left+g.width*.5,gy=g.top+g.height*.7,
+ ang=t<.55?5+50*ease(t/.55):t<.7?55-90*(t-.55)/.15:-35+40*ease((t-.7)/.4),x=sx,y=sy,r=fin?r0:r0*ease(t/.25),T1=fin?.56:.66,d=fin?.55:.85,done=false;
+ if(t>=T1){var s=Math.min(1,(t-T1)/d);if(s<1)bs=14;
+  if(fin){var e=s*s;x=sx+(W/2-sx)*e;y=sy+(H*.45-sy)*e;r=r0+(Math.max(W,H)*.85-r0)*e;done=s>=1}
+  else{r=r0*(1-.2*s);x=sx+(gx-sx)*s;y=sy+(gy-sy)*s-.48*H*s*(1-s);if(s>=1){var u=t-T1-d;x-=r0*.35*(1-Math.exp(-u*7));y+=r0*.35*(1-Math.exp(-u*5));if(!hit){hit=true;imp(0)}}
+   if(t>CT-.3)r*=ease((CT-t)/.3)}}
+ var b=$('#boot');b.style.left=(sx-r0*.9-71-17)+'px';b.style.top=(sy+r0*.5-114)+'px';b.style.transform='rotate('+ang+'deg)';
+ cx=x;cy=y;cr=r;hh=0;
+ if(done){imp(1);b.style.display='none';mode='home';show(start);$('#loading').classList.add('hide');setTimeout(function(){$('#cv').style.zIndex=3;$('#loading').style.display='none'},950)}}
+function prog(){$('#lfill').style.width=P+'%';$('#lpct').textContent=Math.floor(P)+'%';$('#ltip').textContent=tips[Math.min(3,Math.floor(P/26))]}
+function tgt(){if(cur==='home'){var r=$('#anchor').getBoundingClientRect();return[r.left+r.width/2,r.top+r.height*.47,Math.min(r.width,r.height)*.4]}return[W*1.25,H*.62,50]}
+function homeStep(dt){var g=tgt(),a=1-Math.exp(-dt*4.5);cx+=(g[0]-cx)*a;cy+=(g[1]-cy)*a;cr+=(g[2]-cr)*a;
+ if(kicking){kv-=2200*dt;kh+=kv*dt;if(kh<=0){kh=0;kv=-kv*.5;if(kv<90){kv=0;kicking=false}}}
+ hh=cur==='home'?(kicking?kh:12+8*Math.sin(T*2.2)):0;$('#shd').style.transform='scale('+(1-Math.min(.45,hh/280))+')'}
+function loop(t){requestAnimationFrame(loop);var dt=Math.min(.05,(t-last)/1000||0);last=t;T+=dt;var ox=cx,oy=cy;
+ if(mode==='load'){P=Math.min(100,P+dt*24*K);prog();if(P>=100){mode='fin';ft=0}}
+ if(mode==='load'||mode==='fin')ls(dt);else homeStep(dt);
+ if(gl&&cr>1){mesh.rotation.z-=(cx-ox)/cr;mesh.rotation.x+=(cy-oy)/cr;mesh.rotation.y+=(.45+bs)*dt;bs*=Math.exp(-dt*2.2);pv.rotation.x+=(ty*.5-pv.rotation.x)*.08;pv.rotation.y+=(tx*.6-pv.rotation.y)*.08;dl.position.x=-4+tx*8;put(cx,cy-hh,cr);R.render(sc,cam)}}
+function kickBall(){if(cur!=='home'||mode!=='home')return;kv=720+Math.random()*120;kicking=true;bs=16;burst($('#anchor'))}
+$('#anchor').onclick=kickBall;$('#anchor').onkeydown=function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();kickBall()}};
+rs();setTimeout(init3d,40);requestAnimationFrame(loop);
+</script>
+</body>
+</html>
