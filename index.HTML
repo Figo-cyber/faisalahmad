@@ -12,7 +12,7 @@
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-padding-top:90px}
 body{font-family:'Manrope',system-ui,sans-serif;color:var(--tx);line-height:1.6;overflow-x:hidden;background:radial-gradient(60vmax 60vmax at 0 -10%,rgba(198,255,61,.16),transparent 60%),radial-gradient(60vmax 60vmax at 100% -10%,rgba(255,122,26,.13),transparent 60%),var(--bg) fixed;padding-bottom:env(safe-area-inset-bottom,0px)}
-a{color:inherit;text-decoration:none}
+a{color:inherit;text-decoration:none}[data-v],[data-go]{cursor:pointer}
 :focus-visible{outline:3px solid var(--lime);outline-offset:3px}
 h1,h2,h3{font-family:var(--hd);font-weight:900;text-transform:uppercase;letter-spacing:.02em;line-height:.95}
 .floor{position:fixed;left:-60%;right:-60%;bottom:-8vh;height:62vh;z-index:0;pointer-events:none;transform:perspective(520px) rotateX(64deg);transform-origin:50% 100%;background:repeating-linear-gradient(90deg,var(--p1) 0 7vw,var(--p2) 7vw 14vw);-webkit-mask:linear-gradient(transparent,#000 65%);mask:linear-gradient(transparent,#000 65%)}
@@ -56,16 +56,16 @@ nav{position:fixed;top:0;left:0;right:0;z-index:60;display:flex;align-items:cent
 .wipe.in .wl{opacity:1;transform:none}.wipe.out .wl{transition-delay:0s}
 .wb{position:absolute;left:0;top:64%;font-size:84px;transform:translateX(-30vw)}.wipe.in .wb{animation:roll .95s ease-in-out}
 /* views */
-.view{display:none;position:relative;z-index:2;max-width:1100px;margin:auto;padding:110px 5% 60px;min-height:100vh}.view.on{display:block}
-.view.on .rv{animation:pop .75s cubic-bezier(.2,.9,.3,1.15) backwards;animation-delay:calc(var(--i,0)*70ms)}
-h2{font-size:clamp(2.8rem,8vw,5rem)}.sub{color:var(--mu);margin:8px 0 30px}
+.view{position:relative;z-index:2;max-width:1100px;margin:auto;padding:100px 5% 30px}
+.rv{opacity:0}.rv.in{opacity:1;animation:pop .8s cubic-bezier(.2,.9,.3,1.15) backwards;animation-delay:calc(var(--i,0)*80ms)}
+h2{font-size:clamp(2.8rem,8vw,5rem);background:linear-gradient(90deg,var(--tx),var(--ac),var(--or),var(--tx));background-size:300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 6s linear infinite}.sub{color:var(--mu);margin:8px 0 30px}
 .pc{background:var(--pn);color:var(--tx);border-left:5px solid var(--lime);padding:22px 24px;clip-path:polygon(0 0,calc(100% - 22px) 0,100% 22px,100% 100%,22px 100%,0 calc(100% - 22px));transition:transform .15s}
 :root[data-theme=light] .pc{box-shadow:inset 0 0 0 1px #cfe3d2}
 .pc h3{font-size:1.9rem;color:var(--ac)}.pc p{color:var(--mu)}
 .btn{display:inline-flex;gap:8px;align-items:center;cursor:pointer;font:800 .95rem 'Manrope',sans-serif;padding:13px 26px;background:var(--lime);color:#06200f;border:0;border-radius:999px;box-shadow:0 5px 0 #4f8a12,0 0 24px rgba(198,255,61,.4);transition:.15s;margin:4px 8px 8px 0}
 .btn:hover{transform:translateY(3px);box-shadow:0 2px 0 #4f8a12}.btn.alt{background:#f4fff0;box-shadow:0 5px 0 #9dbfa6}
 /* home */
-#home.on{display:grid;grid-template-columns:1.05fr 1fr;gap:10px;align-items:center}
+#home{display:grid;min-height:100vh;padding-top:110px;grid-template-columns:1.05fr 1fr;gap:10px;align-items:center}
 .hi{color:var(--or);font-weight:800}
 #home h1{font-size:clamp(4rem,11.5vw,8.6rem);line-height:.84;margin:10px 0 16px}
 #home h1 .o{color:transparent;-webkit-text-stroke:2px var(--ac)}
@@ -106,6 +106,28 @@ dl{display:grid;grid-template-columns:100px 1fr;gap:6px 10px}dt{font-weight:800;
 .card{text-align:center;display:block}.card b{color:var(--ac)}
 footer{position:relative;z-index:2;text-align:center;padding:30px 5%;color:var(--mu)}
 .conf{position:fixed;z-index:130;pointer-events:none;font-size:28px;margin:-14px 0 0 -14px}
+/* latar & keramaian */
+.bg{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.rays{position:absolute;left:50%;top:30%;width:170vmax;height:170vmax;margin:-85vmax;background:repeating-conic-gradient(rgba(198,255,61,.09) 0 6deg,transparent 6deg 18deg);animation:spin 80s linear infinite;-webkit-mask:radial-gradient(circle,#000 5%,transparent 55%);mask:radial-gradient(circle,#000 5%,transparent 55%)}
+.aur{position:absolute;width:55vmax;height:55vmax;border-radius:50%;filter:blur(90px);opacity:.28;animation:drift 18s ease-in-out infinite alternate;translate:0 calc(var(--sy,0)*-.12px)}
+.aur.a{background:#1fbf6a;left:-15vmax;top:-10vmax}.aur.b{background:#ff7a1a;right:-20vmax;top:45vh;opacity:.16;animation-delay:-8s}.aur.c{background:#1d4ed8;left:35vw;top:85vh;opacity:.14;animation-delay:-4s}
+.fb{position:absolute;top:-60px;opacity:.24;animation:fall linear infinite}
+#spot{position:fixed;inset:0;z-index:1;pointer-events:none;background:radial-gradient(420px circle at var(--mx,50%) var(--my,30%),rgba(198,255,61,.22),transparent 70%);opacity:.55}
+.spk{position:fixed;z-index:119;width:8px;height:8px;margin:-4px;border-radius:50%;background:var(--lime);box-shadow:0 0 12px var(--lime);pointer-events:none;animation:spk .7s ease-out forwards}
+#pg{position:absolute;left:0;bottom:0;height:4px;width:0;background:linear-gradient(90deg,var(--or),var(--lime));box-shadow:0 0 12px var(--lime)}
+.tick{overflow:hidden;position:relative;z-index:2;background:var(--lime);color:#06200f;transform:rotate(-1.2deg);margin:26px -2%;border-block:3px solid #06200f}
+.tick.r{background:var(--or);transform:rotate(1.2deg)}.tick.r .tk{animation-direction:reverse}
+.tk{display:flex;width:max-content;font:900 1.7rem/1.3 var(--hd);letter-spacing:.1em;animation:tk 22s linear infinite;white-space:nowrap}.tk span{padding:6px 22px}
+.fl{position:absolute;font-size:46px;animation:bob 3s ease-in-out infinite;filter:drop-shadow(0 14px 8px #0006);pointer-events:none}
+.gol{position:absolute;left:50%;top:6%;font:900 3.4rem/1 var(--hd);color:var(--lime);text-shadow:0 4px 0 #0a4a27,0 0 24px rgba(198,255,61,.7);white-space:nowrap;pointer-events:none;animation:gol 1.1s ease-out forwards}
+.av,.chip{animation:bob 4s ease-in-out infinite}.card .ico,.goal .ico{animation:bob 3.2s ease-in-out infinite}
+.btn{animation:glow 2.4s ease-in-out infinite}.btn:hover{animation:none}
+.ach:not(.lock){position:relative;overflow:hidden}.ach:not(.lock)::after{content:"";position:absolute;top:0;bottom:0;width:60px;left:-90px;background:linear-gradient(100deg,transparent,rgba(198,255,61,.38),transparent);animation:swp 3.5s ease-in-out infinite}
+#top{position:fixed;right:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:55;width:46px;height:46px;border-radius:50%;border:2px solid #eaff9a;background:var(--lime);color:#06200f;font-size:1.2rem;cursor:pointer;opacity:0;pointer-events:none;transition:.3s;transform:scale(.5)}#top.on{opacity:1;pointer-events:auto;transform:none;animation:bob 2s ease-in-out infinite}
+@keyframes fall{to{transform:translateY(118vh) rotate(400deg)}}@keyframes drift{to{transform:translate(12vw,10vh) scale(1.2)}}@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes bob{50%{transform:translateY(-14px) rotate(6deg)}}@keyframes tk{to{transform:translateX(-50%)}}@keyframes shine{to{background-position:300% 0}}
+@keyframes spk{to{transform:translateY(24px) scale(0);opacity:0}}@keyframes glow{50%{box-shadow:0 5px 0 #4f8a12,0 0 40px rgba(198,255,61,.85)}}@keyframes swp{to{left:120%}}
+@keyframes gol{0%{transform:translate(-50%,20px) scale(.4) rotate(-8deg);opacity:0}25%{opacity:1;transform:translate(-50%,0) scale(1.2) rotate(4deg)}100%{transform:translate(-50%,-70px);opacity:0}}
 @keyframes pop{from{opacity:0;transform:perspective(900px) translateY(50px) rotateX(-40deg) scale(.92)}}
 @keyframes roll{to{transform:translateX(125vw) rotate(900deg)}}
 @keyframes wob{from{transform:rotate(-5deg) translateY(0)}to{transform:rotate(5deg) translateY(-9px)}}
@@ -113,7 +135,7 @@ footer{position:relative;z-index:2;text-align:center;padding:30px 5%;color:var(-
 @keyframes net{30%{transform:scale(1.08,.92) skewX(-5deg)}60%{transform:scale(.97,1.04) skewX(3deg)}}
 @keyframes flash{0%{opacity:0}30%{opacity:1}100%{opacity:0}}
 @keyframes rp{to{transform:scale(1);opacity:0}}
-@media(max-width:820px){#home.on,.about,.goalwrap{grid-template-columns:1fr}#home{text-align:center}.lead{margin-inline:auto}#anchor{height:340px}#burger{display:block}.links{display:none;position:absolute;top:100%;right:4%;left:4%;flex-direction:column;border-radius:22px}.links.open{display:flex}#pill{display:none}.links a.active{background:var(--lime)}}
+@media(max-width:820px){#home,.about,.goalwrap{grid-template-columns:1fr}#home{text-align:center;padding-top:90px}.lead{margin-inline:auto}#anchor{height:300px;order:-1}#burger{display:block}.links{display:none;position:absolute;top:100%;right:4%;left:4%;flex-direction:column;border-radius:22px}.links.open{display:flex}#pill{display:none}.links a.active{background:var(--lime)}}
 @media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
 </style>
 </head>
@@ -121,20 +143,22 @@ footer{position:relative;z-index:2;text-align:center;padding:30px 5%;color:var(-
 <div id="loading"><div class="floor"></div><div id="ltitle" aria-label="Futsal Arena"></div><div id="goal"></div><div class="boot" id="boot"></div>
 <div class="lui"><p id="ltip">Pemanasan…</p><div class="lbar"><b id="lfill"></b></div><div id="lpct">0%</div></div><div id="boom"></div></div>
 <canvas id="cv"></canvas>
+<div class="bg" id="bg"><div class="rays"></div><div class="aur a"></div><div class="aur b"></div><div class="aur c"></div></div><div id="spot"></div>
 <div class="floor"></div>
 <div class="wipe" id="wipe"><div class="st" style="--i:0"></div><div class="st" style="--i:1"></div><div class="st" style="--i:2"></div><div class="st" style="--i:3"></div><div class="st" style="--i:4"></div><div class="st" style="--i:5"></div><div class="wl" id="wl"></div><div class="wb">⚽</div></div>
 
-<nav><a class="brand" data-v="home" href="#home" aria-label="Beranda"><b>9</b>FAISAL</a>
+<nav><div id="pg"></div><a class="brand" data-v="home" aria-label="Beranda" role="button" tabindex="0"><b>9</b>FAISAL</a>
 <div class="nr"><ul class="links" id="links"><div id="pill"></div>
-<li><a href="#home" data-v="home">Beranda</a></li><li><a href="#profil" data-v="profil">Profil</a></li><li><a href="#hobi" data-v="hobi">Hobi</a></li><li><a href="#galeri" data-v="galeri">Galeri</a></li><li><a href="#achievement" data-v="achievement">Achievement</a></li><li><a href="#goals" data-v="goals">Cita-cita</a></li><li><a href="#kontak" data-v="kontak">Kontak</a></li></ul>
+<li><a data-v="home" role="button" tabindex="0">Beranda</a></li><li><a data-v="profil" role="button" tabindex="0">Profil</a></li><li><a data-v="hobi" role="button" tabindex="0">Hobi</a></li><li><a data-v="galeri" role="button" tabindex="0">Galeri</a></li><li><a data-v="achievement" role="button" tabindex="0">Achievement</a></li><li><a data-v="goals" role="button" tabindex="0">Cita-cita</a></li><li><a data-v="kontak" role="button" tabindex="0">Kontak</a></li></ul>
 <button id="theme" aria-label="Ganti tema terang atau gelap">☀</button><button id="burger" aria-label="Buka menu">☰</button></div></nav>
 
 <main>
 <section class="view" id="home"><div><p class="hi rv">Selamat datang di lapangan Faisal</p><h1 class="rv">Faisal<br><span class="o">Ahmad Khoir</span></h1><div class="typ rv" id="typ"></div>
 <div class="tags rv"><span>Kelas 9</span><span>SMPIT Assyifa Boarding School</span><span>Pemain Futsal</span></div>
 <p class="lead rv">Aku suka futsal, baca buku, work out, dan main HP. Ini portofolio digitalku, tempat semua gol dan momen terbaikku.</p>
-<div class="rv"><a href="#achievement" data-go="achievement" class="btn">🏆 Lihat achievement</a><a href="#kontak" data-go="kontak" class="btn alt">✉ Hubungi aku</a></div></div>
-<div id="anchor" role="button" tabindex="0" aria-label="Tendang bola"><div class="nine">9</div><div id="shd"></div><p class="hint">Ketuk bola untuk menendangnya</p></div></section>
+<div class="rv"><a data-go="achievement" class="btn" role="button" tabindex="0">🏆 Lihat achievement</a><a data-go="kontak" class="btn alt" role="button" tabindex="0">✉ Hubungi aku</a></div></div>
+<div id="anchor" role="button" tabindex="0" aria-label="Tendang bola"><div class="nine">9</div><span class="fl" style="left:0;top:8%">🥅</span><span class="fl" style="right:2%;top:20%;animation-delay:-1.2s">👟</span><span class="fl" style="left:6%;bottom:14%;animation-delay:-2s">🏆</span><span class="fl" style="right:6%;bottom:10%;animation-delay:-.6s">⭐</span><div id="shd"></div><p class="hint">Ketuk bola untuk menendangnya</p></div></section>
+<div class="tick"><div class="tk"></div></div>
 
 <section class="view" id="profil"><h2 class="rv">Profil pemain</h2><p class="sub rv">Kartu identitas sang striker</p>
 <div class="about"><div class="pc id rv"><div class="av">F</div><h3>Faisal</h3><p style="font-weight:800">Nomor 9 · Striker</p><div class="xp"><b data-w="82"></b></div><small>Stamina menuju level berikutnya</small></div>
@@ -145,6 +169,7 @@ footer{position:relative;z-index:2;text-align:center;padding:30px 5%;color:var(-
 <section class="view" id="hobi"><h2 class="rv">Hobi</h2><p class="sub rv">Arahkan kursor atau ketuk kartu untuk membaliknya</p><div class="grid" id="hg"></div>
 <h2 class="rv" style="margin-top:70px">Level energi</h2><p class="sub rv">Seberapa besar aku menikmati tiap hobi</p><div class="pc rv" style="max-width:700px" id="skills"></div></section>
 
+<div class="tick r"><div class="tk"></div></div>
 <section class="view" id="galeri"><h2 class="rv">Galeri</h2><p class="sub rv">Klik kartu untuk melihat lebih besar</p><div class="gal" id="gal"></div></section>
 <section class="view" id="achievement"><h2 class="rv">Achievement</h2><p class="sub rv">Piala yang sudah terbuka dan yang masih terkunci</p><div class="achs" id="achs"></div></section>
 
@@ -154,6 +179,7 @@ footer{position:relative;z-index:2;text-align:center;padding:30px 5%;color:var(-
 
 <section class="view" id="kontak"><h2 class="rv">Kontak</h2><p class="sub rv">Ayo berteman dan main futsal bareng</p><div class="grid">
 <a class="pc card rv" href="https://instagram.com/" target="_blank" rel="noopener"><div class="ico">📸</div><h3>Instagram</h3><b>@faisal.contoh</b></a><a class="pc card rv" href="https://www.tiktok.com/" target="_blank" rel="noopener"><div class="ico">🎵</div><h3>TikTok</h3><b>@faisal_contoh</b></a><a class="pc card rv" href="mailto:faisal@contoh.com"><div class="ico">✉️</div><h3>Email</h3><b>faisal@contoh.com</b></a></div></section>
+<button id="top" aria-label="Ke atas">↑</button>
 <footer>© <span id="yr"></span> Faisal Ahmad Khoir · SMPIT Assyifa Boarding School<br>Dibuat dengan ❤️ dan ⚽</footer>
 </main>
 <div id="lb"><div class="box"><div class="big" id="lbb"></div><p id="lbp"></p><button id="lp" aria-label="Sebelumnya">‹</button><button id="lc" aria-label="Tutup">✕</button><button id="ln" aria-label="Berikutnya">›</button></div></div>
@@ -174,7 +200,7 @@ var GAL=[['⚽','Latihan futsal','Keringat hari ini adalah gol esok hari.','line
 $('#gal').innerHTML=GAL.map(function(g,i){return'<div class="gi rv" data-i="'+i+'" style="background:'+g[3]+'">'+g[0]+'<span>'+g[1]+'</span></div>'}).join('');
 function showLb(i){gi=(i+GAL.length)%GAL.length;var g=GAL[gi];$('#lbb').style.background=g[3];$('#lbb').textContent=g[0];$('#lbp').textContent=g[1]+' — '+g[2];$('#lb').classList.add('on')}
 $('#gal').onclick=function(e){var g=e.target.closest('.gi');if(g)showLb(+g.dataset.i)};$('#lc').onclick=function(){$('#lb').classList.remove('on')};$('#lp').onclick=function(){showLb(gi-1)};$('#ln').onclick=function(){showLb(gi+1)};
-addEventListener('keydown',function(e){if(e.key==='Escape')$('#lb').classList.remove('on');if($('#lb').classList.contains('on')){if(e.key==='ArrowLeft')showLb(gi-1);if(e.key==='ArrowRight')showLb(gi+1)}});
+addEventListener('keydown',function(e){var k=e.target.closest&&e.target.closest('[data-v],[data-go]');if(k&&e.key==='Enter')k.click();if(e.key==='Escape')$('#lb').classList.remove('on');if($('#lb').classList.contains('on')){if(e.key==='ArrowLeft')showLb(gi-1);if(e.key==='ArrowRight')showLb(gi+1)}});
 var ACH=[['🥇','Pemain Futsal Aktif','Rutin berlatih dan bertanding','TERBUKA',1],['🏅','Siswa Boarding Disiplin','Menjaga jadwal dan kebersihan','TERBUKA',1],['📖','Kutu Buku','Rajin membaca buku','TERBUKA',1],['🏆','Juara Turnamen','Menang turnamen futsal antar sekolah','TERKUNCI',0],['⭐','Top Skor','Pencetak gol terbanyak','TERKUNCI',0],['👑','Kapten Tim','Memimpin tim futsal','TERKUNCI',0]];
 $('#achs').innerHTML=ACH.map(function(a){return'<div class="pc ach rv'+(a[4]?'':' lock')+'"><div class="ico">'+(a[4]?a[0]:'🔒')+'</div><div><h3>'+a[1]+'</h3><p>'+a[2]+'</p><small>'+a[3]+'</small></div></div>'}).join('');
 var Q=['Latihan keras, hasil tuntas! ⚽','Gol terbaik belum kamu cetak. 🔥','Kerja sama tim bikin menang. 🤝','Jangan takut gagal, tendang lagi! 💪','Istirahat cukup, juara menanti. 😴'],qi=0;
@@ -185,20 +211,26 @@ var Wd=['Pemain Futsal ⚽','Pembaca Buku 📚','Pecinta Work Out 🏋️','Sisw
 $('#yr').textContent=new Date().getFullYear();
 function burst(el){var r=el.getBoundingClientRect(),x0=r.left+r.width/2,y0=r.top+r.height/2;for(var i=0;i<26;i++){(function(i){var c=document.createElement('span');c.className='conf';c.textContent=['⚽','🏆','⭐','🔥'][i%4];c.style.left=x0+'px';c.style.top=y0+'px';document.body.appendChild(c);var a=Math.random()*6.283,d=120+Math.random()*240;c.animate([{transform:'translate(0,0) scale(.5)',opacity:1},{transform:'translate('+Math.cos(a)*d+'px,'+(Math.sin(a)*d-100)+'px) scale(1.3) rotate(540deg)',opacity:0}],{duration:1300,easing:'ease-out'}).onfinish=function(){c.remove()}})(i)}}
 
-/* ===== halaman & transisi ===== */
-var NAMES={home:'Beranda',profil:'Profil',hobi:'Hobi',galeri:'Galeri',achievement:'Achievement',goals:'Cita-cita',kontak:'Kontak'},cur='',busy=false,start=NAMES[location.hash.slice(1)]?location.hash.slice(1):'home';
+/* ===== satu halaman: scroll, transisi klik, latar ===== */
+var NAMES={home:'Beranda',profil:'Profil',hobi:'Hobi',galeri:'Galeri',achievement:'Achievement',goals:'Cita-cita',kontak:'Kontak'},SECS=Object.keys(NAMES),cur='home',busy=false,io,start='home',fine=matchMedia('(pointer:fine)').matches;
 function pill(){var a=$('.links a.active'),p=$('#pill');if(!a){p.style.width='0';return}p.style.left=a.offsetLeft+'px';p.style.width=a.offsetWidth+'px'}
 function cnt(el,n,fn){var c=0,s=setInterval(function(){c+=Math.max(1,n/40);if(c>=n){c=n;clearInterval(s)}fn(el,Math.floor(c))},30)}
-function enter(v){v.querySelectorAll('.rv').forEach(function(e,i){e.style.setProperty('--i',i)});
- v.querySelectorAll('[data-n]').forEach(function(b){cnt(b,+b.dataset.n,function(e,c){e.textContent=c})});
- v.querySelectorAll('[data-w]').forEach(function(b){b.style.width='0';setTimeout(function(){b.style.width=b.dataset.w+'%'},350);var sk=b.closest('.skill');if(sk)cnt(sk.querySelector('.pct'),+b.dataset.w,function(e,c){e.textContent=c+'%'})})}
-function show(id){$$('.view').forEach(function(v){v.classList.toggle('on',v.id===id)});cur=id;document.body.dataset.v=id;$$('.links a').forEach(function(a){a.classList.toggle('active',a.dataset.v===id)});pill();enter($('#'+id));scrollTo(0,0);try{history.replaceState(null,'','#'+id)}catch(e){}}
-function go(id){if(busy||id===cur)return;busy=true;var w=$('#wipe');$('#wl').textContent=NAMES[id];w.className='wipe in';setTimeout(function(){show(id)},780);setTimeout(function(){w.className='wipe out'},950);setTimeout(function(){w.className='wipe';busy=false},1750)}
+function fx(v){v.querySelectorAll('[data-n]').forEach(function(b){if(b.dataset.d)return;b.dataset.d=1;cnt(b,+b.dataset.n,function(e,c){e.textContent=c})});
+ v.querySelectorAll('[data-w]').forEach(function(b){if(b.dataset.d)return;b.dataset.d=1;setTimeout(function(){b.style.width=b.dataset.w+'%'},350);var sk=b.closest('.skill');if(sk)cnt(sk.querySelector('.pct'),+b.dataset.w,function(e,c){e.textContent=c+'%'})})}
+function startObs(){io=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;var t=e.target;t.style.setProperty('--i',[].indexOf.call(t.parentNode.children,t)%6);t.classList.add('in');fx(t);io.unobserve(t)})},{threshold:.12});$$('.rv').forEach(function(x){io.observe(x)})}
+function spy(){var c='home';SECS.forEach(function(id){if($('#'+id).getBoundingClientRect().top<H*.4)c=id});if(c!==cur||!$('.links a.active')){cur=c;$$('.links a').forEach(function(a){a.classList.toggle('active',a.dataset.v===c)});pill()}}
+function jump(id){var s=$('#'+id);scrollTo(0,id==='home'?0:s.offsetTop);s.querySelectorAll('.rv').forEach(function(e,i){e.classList.remove('in');void e.offsetWidth;e.style.setProperty('--i',i%6);e.classList.add('in');fx(e)});spy()}
+function go(id){if(busy||id===cur)return;busy=true;var w=$('#wipe');$('#wl').textContent=NAMES[id];w.className='wipe in';setTimeout(function(){jump(id)},780);setTimeout(function(){w.className='wipe out'},950);setTimeout(function(){w.className='wipe';busy=false},1750)}
 function ripple(a,e){var r=a.getBoundingClientRect(),s=document.createElement('i'),z=Math.max(r.width,r.height)*2;s.className='rip';s.style.cssText='width:'+z+'px;height:'+z+'px;left:'+(e.clientX-r.left-z/2)+'px;top:'+(e.clientY-r.top-z/2)+'px';a.appendChild(s);setTimeout(function(){s.remove()},600)}
 document.addEventListener('click',function(e){var a=e.target.closest('[data-v],[data-go]');if(!a||!NAMES[a.dataset.v||a.dataset.go])return;e.preventDefault();if(a.closest('.links'))ripple(a,e);go(a.dataset.v||a.dataset.go);$('#links').classList.remove('open')});
 $('#burger').onclick=function(){$('#links').classList.toggle('open')};
+$('#top').onclick=function(){scrollTo({top:0,behavior:'smooth'})};
 if(document.fonts&&document.fonts.ready)document.fonts.ready.then(pill);
-if(matchMedia('(pointer:fine)').matches)$$('.pc').forEach(function(c){c.addEventListener('pointermove',function(e){var r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;c.style.transform='perspective(700px) rotateX('+(-y*9)+'deg) rotateY('+x*11+'deg) translateZ(6px)'});c.addEventListener('pointerleave',function(){c.style.transform=''})});
+addEventListener('scroll',function(){var h=root;spy();$('#pg').style.width=h.scrollTop/Math.max(1,h.scrollHeight-h.clientHeight)*100+'%';$('#top').classList.toggle('on',h.scrollTop>500);root.style.setProperty('--sy',h.scrollTop)},{passive:true});
+if(fine)$$('.pc:not(.fr)').forEach(function(c){c.addEventListener('pointermove',function(e){var r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;c.style.transform='perspective(700px) rotateX('+(-y*9)+'deg) rotateY('+x*11+'deg) translateZ(6px)'});c.addEventListener('pointerleave',function(){c.style.transform=''})});
+var EM=['⚽','⚽','🥅','👟','🏆','⭐'];for(var q2=0;q2<18;q2++){var fb=document.createElement('span');fb.className='fb';fb.textContent=EM[q2%6];fb.style.cssText='left:'+Math.random()*100+'%;font-size:'+(16+Math.random()*28)+'px;animation-duration:'+(10+Math.random()*14)+'s;animation-delay:-'+Math.random()*20+'s';$('#bg').appendChild(fb)}
+var tt='GOOOL! ⚽ FUTSAL ⚽ TEAMWORK ⚽ DISIPLIN ⚽ PANTANG MENYERAH ⚽ ';$$('.tk').forEach(function(k){k.innerHTML='<span>'+tt+tt+'</span><span>'+tt+tt+'</span>'});
+function boot2(){startObs();spy();if(start!=='home')setTimeout(function(){jump(start)},300);nextHop=T+3}
 
 /* ===== bola 3D ===== */
 var gl=false,R,sc,cam,mesh,pv,dl,W=innerWidth,H=innerHeight,U=1,FOV=35,D=12;
@@ -221,7 +253,7 @@ function init3d(){try{R=new THREE.WebGLRenderer({canvas:$('#cv'),alpha:true,anti
  var a=new THREE.PointLight(0xc6ff3d,1.4,40);a.position.set(7,-1,-2);sc.add(a);var b=new THREE.PointLight(0xff7a1a,.8,40);b.position.set(-7,-4,4);sc.add(b);gl=true;rs()}
  catch(e){gl=false;$('#anchor').insertAdjacentHTML('beforeend','<div class="fbk">⚽</div>')}}
 function put(px,py,r){pv.position.set((px-W/2)*U,-(py-H/2)*U,0);pv.scale.setScalar(Math.max(r,.01)*U)}
-addEventListener('pointermove',function(e){tx=e.clientX/W-.5;ty=e.clientY/H-.5});
+var lsp=0;addEventListener('pointermove',function(e){tx=e.clientX/W-.5;ty=e.clientY/H-.5;root.style.setProperty('--mx',e.clientX+'px');root.style.setProperty('--my',e.clientY+'px');var n=performance.now();if(!fine||n-lsp<45)return;lsp=n;var d=document.createElement('i');d.className='spk';d.style.left=e.clientX+'px';d.style.top=e.clientY+'px';document.body.appendChild(d);setTimeout(function(){d.remove()},700)});
 
 /* ===== loop: loading, tendangan, hero ===== */
 var T=0,last=0,mode='load',cx=0,cy=0,cr=0,hh=0,kh=0,kv=0,kicking=false,bs=0,tx=0,ty=0,P=0,cyc=0,ft=0,hit=false,CT=2.3,K=matchMedia('(prefers-reduced-motion:reduce)').matches?4:1,tips=['Pemanasan…','Mengikat tali sepatu…','Dribble bola…','Siap tendangan pertama!'];
@@ -237,19 +269,28 @@ function ls(dt){var fin=mode==='fin',t=fin?(ft+=dt):(cyc+=dt);if(!fin&&cyc>CT){c
    if(t>CT-.3)r*=ease((CT-t)/.3)}}
  var b=$('#boot');b.style.left=(sx-r0*.9-71-17)+'px';b.style.top=(sy+r0*.5-114)+'px';b.style.transform='rotate('+ang+'deg)';
  cx=x;cy=y;cr=r;hh=0;
- if(done){imp(1);b.style.display='none';mode='home';show(start);$('#loading').classList.add('hide');setTimeout(function(){$('#cv').style.zIndex=3;$('#loading').style.display='none'},950)}}
+ if(done){imp(1);b.style.display='none';mode='home';stamp();boot2();$('#loading').classList.add('hide');setTimeout(function(){$('#cv').style.zIndex=3;$('#loading').style.display='none'},950)}}
 function prog(){$('#lfill').style.width=P+'%';$('#lpct').textContent=Math.floor(P)+'%';$('#ltip').textContent=tips[Math.min(3,Math.floor(P/26))]}
-function tgt(){if(cur==='home'){var r=$('#anchor').getBoundingClientRect();return[r.left+r.width/2,r.top+r.height*.47,Math.min(r.width,r.height)*.4]}return[W*1.25,H*.62,50]}
-function homeStep(dt){var g=tgt(),a=1-Math.exp(-dt*4.5);cx+=(g[0]-cx)*a;cy+=(g[1]-cy)*a;cr+=(g[2]-cr)*a;
+var docked=false,psy=0,nextHop=1e9;
+function tgt(){var r=$('#anchor').getBoundingClientRect();docked=!(r.bottom>140&&r.top<H-60);if(!docked)return[r.left+r.width/2,r.top+r.height*.47,Math.min(r.width,r.height)*.4];return[W-46,H-130,30]}
+function homeStep(dt){var g=tgt(),a=1-Math.exp(-dt*5),sy=root.scrollTop;cx+=(g[0]-cx)*a;cy+=(g[1]-cy)*a;cr+=(g[2]-cr)*a;
+ if(gl)mesh.rotation.x+=(sy-psy)/Math.max(cr,1)*1.4;psy=sy;
+ if(!docked&&!kicking&&T>nextHop){kv=400;kicking=true;nextHop=T+4+Math.random()*3}
+ if(docked){kicking=false;kh=0}
  if(kicking){kv-=2200*dt;kh+=kv*dt;if(kh<=0){kh=0;kv=-kv*.5;if(kv<90){kv=0;kicking=false}}}
- hh=cur==='home'?(kicking?kh:12+8*Math.sin(T*2.2)):0;$('#shd').style.transform='scale('+(1-Math.min(.45,hh/280))+')'}
+ hh=docked?6*Math.sin(T*3):(kicking?kh:12+8*Math.sin(T*2.2));var sh=$('#shd');sh.style.opacity=docked?0:1;sh.style.transform='scale('+(1-Math.min(.45,hh/280))+')'}
 function loop(t){requestAnimationFrame(loop);var dt=Math.min(.05,(t-last)/1000||0);last=t;T+=dt;var ox=cx,oy=cy;
  if(mode==='load'){P=Math.min(100,P+dt*24*K);prog();if(P>=100){mode='fin';ft=0}}
  if(mode==='load'||mode==='fin')ls(dt);else homeStep(dt);
  if(gl&&cr>1){mesh.rotation.z-=(cx-ox)/cr;mesh.rotation.x+=(cy-oy)/cr;mesh.rotation.y+=(.45+bs)*dt;bs*=Math.exp(-dt*2.2);pv.rotation.x+=(ty*.5-pv.rotation.x)*.08;pv.rotation.y+=(tx*.6-pv.rotation.y)*.08;dl.position.x=-4+tx*8;put(cx,cy-hh,cr);R.render(sc,cam)}}
-function kickBall(){if(cur!=='home'||mode!=='home')return;kv=720+Math.random()*120;kicking=true;bs=16;burst($('#anchor'))}
+function kickBall(){if(mode!=='home'||docked)return;kv=720+Math.random()*120;kicking=true;bs=16;nextHop=T+6;burst($('#anchor'));var g=document.createElement('div');g.className='gol';g.textContent=['GOOOL!','MANTAP!','SUUUI!','TENDANG!'][Math.floor(Math.random()*4)];$('#anchor').appendChild(g);setTimeout(function(){g.remove()},1100)}
 $('#anchor').onclick=kickBall;$('#anchor').onkeydown=function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();kickBall()}};
-rs();setTimeout(init3d,40);requestAnimationFrame(loop);
+function stamp(){window.name='fak_'+Date.now()}
+var seen=/^fak_\d+$/.test(window.name)&&Date.now()-(+window.name.slice(4))<20000;
+['pointerdown','keydown','scroll'].forEach(function(n){addEventListener(n,stamp,{passive:true})});
+rs();setTimeout(init3d,40);
+if(seen){mode='home';cx=W/2;cy=H/2;cr=0;$('#loading').style.display='none';$('#cv').style.zIndex=3;boot2()}
+requestAnimationFrame(loop);
 </script>
 </body>
 </html>
